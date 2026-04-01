@@ -9,7 +9,64 @@
         body {
             background-image: url(assets/Screen_background.png);
             background-size: cover;
-            padding-top: 150px;
+            padding-top: 60px;
+            min-height: 100vh;
+        }
+        .card-panel {
+            background: rgba(255, 248, 230, 0.92);
+            border: 2px solid #8b5e3c;
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+        }
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #3d1f00;
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3d1f00;
+            margin-bottom: 12px;
+        }
+        .team-info {
+            font-size: 1.1rem;
+            color: #3d1f00;
+            font-weight: 500;
+        }
+        .team-info span {
+            font-weight: 700;
+        }
+        .info-box {
+            background: #fff3cd;
+            border-left: 4px solid #d4820a;
+            border-radius: 4px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            color: #5a3800;
+            font-size: 0.97rem;
+        }
+        .info-box ul {
+            margin: 6px 0 0 0;
+            padding-left: 18px;
+        }
+        label {
+            font-weight: 600;
+            color: #3d1f00;
+        }
+        .table-dark th, .table-dark td {
+            font-size: 0.95rem;
+        }
+        .cost-preview {
+            font-size: 0.9rem;
+            color: #5a3800;
+            background: #ffeeba;
+            border-radius: 4px;
+            padding: 6px 10px;
+            margin-top: 10px;
+            margin-bottom: 4px;
         }
     </style>
 </head>
@@ -22,81 +79,101 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <h1>Pirate Ship Control</h1>
-            </div>
+        <div class="card-panel">
+            <h1>&#9763; Pirate Ship Control</h1>
         </div>
+
         <div class="row" v-if="!ready">
-            <div class="col-md-4">
-                <form @submit.prevent="register">
-                    <div class="form-group">
-                        <label for="shipName">Team Name</label>
-                        <input v-model="team.Name" type="text" class="form-control" id="shipName" placeholder="Teamname">
-                        <small id="teamNameHelp" class="form-text text-muted">Your Team Name</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="secret">Secret</label>
-                        <input v-model="team.Secret" type="password" class="form-control" id="secret" placeholder="Secret">
-                        <small id="secretHelp" class="form-text text-muted">Well be saved in local storage</small>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
-                </form>
+            <div class="col-md-5">
+                <div class="card-panel">
+                    <h2>Register / Login</h2>
+                    <form @submit.prevent="register">
+                        <div class="form-group">
+                            <label for="shipName">Team Name</label>
+                            <input v-model="team.Name" type="text" class="form-control" id="shipName" placeholder="Enter your team name">
+                        </div>
+                        <div class="form-group">
+                            <label for="secret">Secret</label>
+                            <input v-model="team.Secret" type="password" class="form-control" id="secret" placeholder="Enter your secret">
+                            <small class="form-text text-muted">Saved in local storage for convenience.</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Register / Login</button>
+                    </form>
+                </div>
             </div>
         </div>
+
         <div class="row" v-if="ready">
             <div class="col-md-12">
-                <h2>Team: {{ team.Name }}</h2>
-                <h3>Gold: {{ team.Gold }}</h3>
-                <hr />
+                <div class="card-panel d-flex justify-content-between align-items-center" style="padding: 14px 24px;">
+                    <span class="team-info">Team: <span>{{ team.Name }}</span></span>
+                    <span class="team-info">&#127873; Gold: <span>{{ team.Gold }}</span></span>
+                    <span class="team-info">&#128176; Gold Spent: <span>{{ team.GoldSpent }}</span></span>
+                </div>
             </div>
             <div class="col-md-4">
-                <h2>Buy Ship</h2>
-                <p>A ship costs 2000 gold + 1000 gold per additional point. Each stat starts at 1. It is recommended to buy at least one additional speed.</p>
-                <form @submit.prevent="buyShip">
-                    <div class="form-group">
-                        <label>Ship Name</label>
-                        <input v-model="newShip.ShipName" type="text" class="form-control" placeholder="Ship Name">
+                <div class="card-panel">
+                    <h2>&#128ship; Buy a Ship</h2>
+                    <div class="info-box">
+                        <strong>Pricing:</strong>
+                        <ul>
+                            <li>Base cost: <strong>2000 gold</strong></li>
+                            <li>Each extra stat point: <strong>+1000 gold</strong></li>
+                            <li>All stats start at <strong>1</strong></li>
+                        </ul>
+                        <div style="margin-top:6px;">&#128161; Tip: Buy at least <strong>+1 Speed</strong> to move faster.</div>
                     </div>
-                    <div class="form-group">
-                        <label>Additional Cannons</label>
-                        <input v-model="newShip.Cannons" type="text" class="form-control" placeholder="0">
-                    </div>
-                    <div class="form-group">
-                        <label>Additional Sight</label>
-                        <input v-model="newShip.Sight" type="text" class="form-control" placeholder="0">
-                    </div>
-                    <div class="form-group">
-                        <label>Additional Speed</label>
-                        <input v-model="newShip.Speed" type="text" class="form-control" placeholder="1">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Buy Ship</button>
-                </form>
+                    <form @submit.prevent="buyShip">
+                        <div class="form-group">
+                            <label>Ship Name</label>
+                            <input v-model="newShip.ShipName" type="text" class="form-control" placeholder="e.g. Black Pearl">
+                        </div>
+                        <div class="form-group">
+                            <label>Additional Cannons <small class="text-muted">(base: 1)</small></label>
+                            <input v-model="newShip.Cannons" type="number" min="0" class="form-control" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Additional Sight <small class="text-muted">(base: 1)</small></label>
+                            <input v-model="newShip.Sight" type="number" min="0" class="form-control" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Additional Speed <small class="text-muted">(base: 1)</small></label>
+                            <input v-model="newShip.Speed" type="number" min="0" class="form-control" placeholder="0">
+                        </div>
+                        <div class="cost-preview">
+                            &#128176; Estimated cost: <strong>{{ 2000 + ((+newShip.Cannons||0) + (+newShip.Sight||0) + (+newShip.Speed||0)) * 1000 }} gold</strong>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">&#128; Buy Ship</button>
+                    </form>
+                </div>
             </div>
             <div class="col-md-8">
-                <h2>Ships</h2>
-                <table class="table table-dark">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">id</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Cannons</th>
-                        <th scope="col">Speed</th>
-                        <th scope="col">Sight</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(ship, index) in ships">
-                            <th scope="row">{{ index }}</th>
-                            <td>{{ ship.id }}</td>
-                            <td>{{ ship.name }}</td>
-                            <td>{{ ship.cannons }}</td>
-                            <td>{{ ship.speed }}</td>
-                            <td>{{ ship.sight }}</td>
+                <div class="card-panel">
+                    <h2>&#9875; Your Fleet</h2>
+                    <p v-if="ships.length === 0" class="text-muted">No ships yet. Buy one to get started!</p>
+                    <table class="table table-dark" v-if="ships.length > 0">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">&#128; Cannons</th>
+                            <th scope="col">&#128168; Speed</th>
+                            <th scope="col">&#128065; Sight</th>
                         </tr>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(ship, index) in ships">
+                                <th scope="row">{{ index }}</th>
+                                <td><code style="color:#adf;">{{ ship.id }}</code></td>
+                                <td>{{ ship.name }}</td>
+                                <td>{{ ship.cannons }}</td>
+                                <td>{{ ship.speed }}</td>
+                                <td>{{ ship.sight }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
