@@ -6,8 +6,9 @@ import (
 	"Pirates/models/info"
 	"Pirates/models/ship"
 	"fmt"
-	"github.com/jinzhu/copier"
 	"math/rand"
+
+	"github.com/jinzhu/copier"
 )
 
 const MAX_NO_ACTION = 600
@@ -204,8 +205,15 @@ func (o *Ocean) getTile(x, y int) *Tile {
 	return &o.Tiles[x][y]
 }
 
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
 func (o *Ocean) moveShip(ship *ship.Ship, dx int, dy int) {
-	if dx+dy > ship.MaxSpeed {
+	if abs(dx)+abs(dy) > ship.MaxSpeed {
 		ship.AppendMessage(info.SPEED_NOT_POSSIBLE)
 		return
 	}
