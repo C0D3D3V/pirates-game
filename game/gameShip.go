@@ -37,6 +37,10 @@ func (g *Game) GetInfoForShipId(shipId string) *response.Info {
 	resp := response.Info{}
 	resp.Lookout = g.ocean.GetLookoutForShip(shipId)
 	resp.Ship = playerShip.GetInfoShip()
+	if len(playerShip.Messages) > 0 {
+		resp.Messages = playerShip.Messages
+		playerShip.Messages = nil
+	}
 
 	return &resp
 }
