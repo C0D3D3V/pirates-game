@@ -43,13 +43,35 @@ class Ship {
         // TODO Implement your code for your ships here!
 
         // You have only 100ms time to react! Your Ship will dissapear after 60 Second Idle
+
+        // Example:
+
+        // Check if we are standing on a port and attack it
+        const attack = [];
+        if (info.Lookout) {
+            const myTile = info.Lookout.Tiles.find(
+                t => t.X === info.Lookout.X && t.Y === info.Lookout.Y
+            );
+            if (myTile && myTile.Port) {
+                console.log('Attacking port: ' + myTile.Port.Id);
+                attack.push(myTile.Port.Id);
+            }
+        }
+
+        // Move in a random direction
+        const directions = [
+            { MoveX:  1, MoveY:  0 },
+            { MoveX: -1, MoveY:  0 },
+            { MoveX:  0, MoveY:  1 },
+            { MoveX:  0, MoveY: -1 },
+        ];
+        const dir = directions[Math.floor(Math.random() * directions.length)];
+
         this.websocket.send(
             JSON.stringify({
-                // TODO Movement here
-                MoveX: 1,
-                MoveY: 0,
-                // TODO Insert your attack here
-                Attack: ["PORT_wQkGBSYrSQPECsJJ"]
+                MoveX: dir.MoveX,
+                MoveY: dir.MoveY,
+                Attack: attack
             })
         );
     }
