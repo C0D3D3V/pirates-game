@@ -63,10 +63,13 @@
         }
         .ship {
             position: absolute;
+            top: 0;
+            left: 0;
             width: 50px;
             height: 50px;
             background-size: contain;
             background-repeat: no-repeat;
+            background-position: center center;
         }
         .explosion {
             position: absolute;
@@ -75,14 +78,50 @@
             background-size: contain;
             background-repeat: no-repeat;
         }
-        .port { position: relative; }
-        .porttext {
+        .port {
             position: absolute;
-            width: 200px;
-            top: -20px;
-            left: 0;
-            color: white;
-            z-index: 100;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+        }
+        .port-tooltip {
+            display: none;
+            position: absolute;
+            bottom: 58px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 18, 5, 0.90);
+            border: 1px solid rgba(255, 200, 50, 0.55);
+            border-radius: 6px;
+            padding: 4px 10px;
+            color: rgba(255, 235, 190, 0.97);
+            font-family: Georgia, serif;
+            font-size: 13px;
+            white-space: nowrap;
+            z-index: 300;
+            pointer-events: none;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        }
+        .port:hover .port-tooltip {
+            display: block;
+        }
+        .ship-tooltip {
+            display: block;
+            position: absolute;
+            bottom: 52px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 20, 40, 0.45);
+            border: 1px solid rgba(150, 210, 255, 0.35);
+            border-radius: 4px;
+            padding: 2px 7px;
+            color: rgba(200, 235, 255, 0.90);
+            font-family: Georgia, serif;
+            font-size: 11px;
+            white-space: nowrap;
+            z-index: 300;
+            pointer-events: none;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 1);
         }
 
         /* Leaderboard — fixed left */

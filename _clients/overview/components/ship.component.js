@@ -36,5 +36,9 @@ Vue.component('ships-view', {
             }
         },
     },
-    template: '<div class="ship" v-if="ships.length > 0" v-bind:style="{ backgroundImage: \'url(\' + getShipImage(ships[0]) + \')\' }"></div>'
+    template: `
+        <div class="ship" v-if="ships.length > 0" v-bind:style="{ backgroundImage: 'url(' + getShipImage(ships[0]) + ')' }">
+            <div class="ship-tooltip" v-if="ships[0].Name">{{ ships[0].Name }}</div>
+        </div>
+    `
 });

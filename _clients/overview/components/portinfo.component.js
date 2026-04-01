@@ -14,7 +14,7 @@ Vue.component('port', {
     template: `
         <div class="port" v-if="port">
             <div class="explosion" v-bind:style="{ backgroundImage: 'url(' + getOuttimeImage(port) + ')' }"></div>
-            <span class="porttext">{{ port.Name }}</span>
+            <div class="port-tooltip">{{ port.Name }}</div>
         </div>
     `
 });

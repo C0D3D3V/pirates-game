@@ -83,8 +83,6 @@ After that they can buy Ships.
 In the example implementation the page will get all active ships for a team and then create the Ship class.
 You can change whatever you want!
 
-![Game field](game.jpg?raw=true "Game filed")
-
 ### Licences
 Apache 2.0 except the asses in the overview.
 These are licensed only in purpose for this games, so if you want to use it somewhere else, please buy the assets.
