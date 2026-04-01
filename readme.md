@@ -32,6 +32,20 @@ Each tick you will get all surrounding tiles you can see.
 ### Cannons
 More cannons means a higher change to win, see fighting.
 
+## Ship Appearance
+The visual appearance of a ship is determined by the sum of all its attributes (Cannons + Speed + Sight).
+
+| Score | Ship |
+|-------|------|
+| ≤ 3   | Ship 1 |
+| ≤ 6   | Ship 2 |
+| ≤ 9   | Ship 3 |
+| ≤ 12  | Ship 4 |
+| ≤ 15  | Ship 5 |
+| ≤ 18  | Ship 6 |
+| ≤ 21  | Ship 7 |
+| > 24  | Ship 8 |
+
 ## Fighting
 If a ship attacks a port, a random number will be generated from `0 to amount of cannons`\
 If the amount of the ship / attacker is greater or equal, it will win!\
