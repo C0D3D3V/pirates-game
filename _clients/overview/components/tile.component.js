@@ -17,7 +17,12 @@ Vue.component('tiles-view', {
     },
     template: `
         <div>
-            <div class="row" v-for="(tileX, X) in tiles">
+            <div class="tile-header-row">
+                <div class="tile-label tile-corner"></div>
+                <div class="tile-label tile-col-label" v-for="(tileY, Y) in tiles[0]">{{ Y }}</div>
+            </div>
+            <div class="tile-map-row" v-for="(tileX, X) in tiles">
+                <div class="tile-label tile-row-label">{{ X }}</div>
                 <div class="tile" v-bind:style="{ backgroundImage: 'url(' + getIslandImage(tileY.Type, X, Y) + ')' }" v-for="(tileY, Y) in tileX">
                     <ships-view v-bind:ships="tileY.Ships"></ships-view>
                     <port v-bind:port="tileY.Port"></port>
