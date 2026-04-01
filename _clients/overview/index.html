@@ -103,7 +103,6 @@
 <script src="components/portinfo.component.js"></script>
 <script>
     const URL = 'localhost:1337/';
-    const SECRET = 'eDnZTefaveuddpMF'; // TODO INSERT SECRET HERE
 
     // Better you change nothing here
     var app = new Vue({
@@ -125,7 +124,7 @@
 
             getInfo() {
                 const xhr = new XMLHttpRequest();
-                const url = 'http://localhost:1337/status/'+SECRET;
+                const url = 'http://localhost:1337/status';
                 xhr.open('GET', url);
                 xhr.send();
                 xhr.onreadystatechange = (e) => {

@@ -4,24 +4,19 @@ import (
 	"Pirates/api/request"
 	"Pirates/events"
 	"Pirates/game"
-	"Pirates/util"
 	"github.com/gin-gonic/gin"
-	"log"
 	"net/http"
 )
 
 type ApiController struct {
 	handler *ShipConnectionHandler
 	game    *game.Game
-	secret  string
 }
 
 func NewApiController(router *gin.RouterGroup, game *game.Game) *ApiController {
 	controller := ApiController{}
 	controller.handler = NewShipConnectionHandler(game)
 	controller.game = game
-	controller.generateSecret()
-
 	router.POST("registerPlayer", controller.RegisterPlayer)
 	router.POST("buyShip", controller.BuyShip)
 
@@ -29,14 +24,9 @@ func NewApiController(router *gin.RouterGroup, game *game.Game) *ApiController {
 	router.GET("ships/:player/:secret", controller.GetShips)
 	router.GET("shipControl/:shipId/:player/:secret", controller.ShipController)
 
-	router.GET("status/"+controller.secret, controller.GetStatus)
+	router.GET("status", controller.GetStatus)
 
 	return &controller
-}
-
-func (a *ApiController) generateSecret() {
-	a.secret = util.RandSeq(16)
-	log.Println("Status Secret: ", a.secret)
 }
 
 func (a *ApiController) GetStatus(gc *gin.Context) {
