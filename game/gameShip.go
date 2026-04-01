@@ -67,7 +67,7 @@ func (g *Game) NewShip(buyRequest *request.Buy) (*info.InfoShip, error) {
 	player.Gold -= price
 	player.GoldSpent += price
 
-	newShip := ship.NewShip(buyRequest.ShipName, buyRequest.Speed, buyRequest.Canons, buyRequest.Sight)
+	newShip := ship.NewShip(buyRequest.ShipName, buyRequest.Speed, buyRequest.Cannons, buyRequest.Sight)
 	g.ocean.AddShip(newShip)
 	player.Ships = append(player.Ships, newShip)
 
@@ -83,7 +83,7 @@ func (g *Game) NewShip(buyRequest *request.Buy) (*info.InfoShip, error) {
 func (g *Game) calcShipPrice(buyRequest *request.Buy) int64 {
 	price := 2000
 	price += buyRequest.Speed * 1000
-	price += buyRequest.Canons * 1000
+	price += buyRequest.Cannons * 1000
 	price += buyRequest.Sight * 1000
 
 	return int64(price)

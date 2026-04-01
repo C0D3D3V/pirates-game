@@ -4,7 +4,7 @@ type Buy struct {
 	Player PlayerRequest
 
 	ShipName string
-	Canons   int
+	Cannons  int
 	Sight    int
 	Speed    int
 }

@@ -52,19 +52,23 @@
             </div>
             <div class="col-md-4">
                 <h2>Buy Ship</h2>
-                <p>A ship costs 2000 gold + 1000 gold per option (1 per default)</p>
+                <p>A ship costs 2000 gold + 1000 gold per additional point. Each stat starts at 1. It is recommended to buy at least one additional speed.</p>
                 <form @submit.prevent="buyShip">
                     <div class="form-group">
+                        <label>Ship Name</label>
                         <input v-model="newShip.ShipName" type="text" class="form-control" placeholder="Ship Name">
                     </div>
                     <div class="form-group">
-                        <input v-model="newShip.Cannons" type="text" class="form-control" placeholder="Cannons">
+                        <label>Additional Cannons</label>
+                        <input v-model="newShip.Cannons" type="text" class="form-control" placeholder="0">
                     </div>
                     <div class="form-group">
-                        <input v-model="newShip.Sight" type="text" class="form-control" placeholder="Sight">
+                        <label>Additional Sight</label>
+                        <input v-model="newShip.Sight" type="text" class="form-control" placeholder="0">
                     </div>
                     <div class="form-group">
-                        <input v-model="newShip.Speed" type="text" class="form-control" placeholder="Speed">
+                        <label>Additional Speed</label>
+                        <input v-model="newShip.Speed" type="text" class="form-control" placeholder="1">
                     </div>
                     <button type="submit" class="btn btn-primary">Buy Ship</button>
                 </form>
@@ -199,18 +203,17 @@
                         let shipData = JSON.parse(xhr.responseText);
                         InitShip(shipData);
                         this.getShips();
+                        this.newShip = {
+                            ShipName: '',
+                            Cannons: '',
+                            Sight: '',
+                            Speed: '',
+                        };
                     }
                     if(xhr.readyState === 4 && xhr.status >= 400) {
                         text = xhr.responseText;
                         this.error = text;
                     }
-                };
-
-                this.newShip =  {
-                    ShipName: '',
-                    Cannons: 0,
-                    Sight: 0,
-                    Speed: 0,
                 };
             },
 
