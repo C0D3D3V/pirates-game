@@ -72,6 +72,7 @@ func (g *Game) NewShip(buyRequest *request.Buy) (*info.InfoShip, error) {
 	player.GoldSpent += price
 
 	newShip := ship.NewShip(buyRequest.ShipName, buyRequest.Speed, buyRequest.Cannons, buyRequest.Sight)
+	newShip.Player = player.Name
 	g.ocean.AddShip(newShip)
 	player.Ships = append(player.Ships, newShip)
 

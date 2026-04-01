@@ -11,8 +11,9 @@ import (
 )
 
 type Ship struct {
-	Id   string
-	Name string
+	Id     string
+	Name   string
+	Player string
 
 	Cannons int
 	// Tons deadweight all told
@@ -126,12 +127,13 @@ func (s *Ship) AppendMessage(msg info.Message) {
 
 func (s *Ship) GetInfoShip() *info.InfoShip {
 	return &info.InfoShip{
-		s.Id,
-		s.Name,
-		s.Sight,
-		s.Cannons,
-		s.Tdwat,
-		s.GetDraught(),
-		s.GetSpeed(),
+		Id:      s.Id,
+		Name:    s.Name,
+		Player:  s.Player,
+		Sight:   s.Sight,
+		Canons:  s.Cannons,
+		Tdwat:   s.Tdwat,
+		Draught: s.GetDraught(),
+		Speed:   s.GetSpeed(),
 	}
 }

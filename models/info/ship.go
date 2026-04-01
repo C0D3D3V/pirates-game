@@ -3,6 +3,7 @@ package info
 type InfoShip struct {
 	Id      string `json:"id"`
 	Name    string `json:"name"`
+	Player  string `json:"player"`
 	Sight   int    `json:"sight"`
 	Canons  int    `json:"cannons"`
 	Tdwat   int    `json:"-"`
