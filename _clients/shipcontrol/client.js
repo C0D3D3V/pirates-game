@@ -13,8 +13,6 @@ class Ship {
         this.cannons = shipData.cannons;
         this.sight = shipData.sight;
         this.speed = shipData.speed;
-        this.reconnectDelay = 1000;
-
         this.connect();
     }
 
@@ -28,19 +26,14 @@ class Ship {
 
     onOpen(evt) {
         console.log('Ship ' + this.id + ' ready');
-        this.reconnectDelay = 1000;
     }
 
     onClose(evt) {
-        // https://en.wikipedia.org/wiki/IP_over_Avian_Carriers
-        console.log('Ship ' + this.id + ' no more pigeons to send, retrying in ' + this.reconnectDelay + 'ms');
-        setTimeout(() => this.connect(), this.reconnectDelay);
-        this.reconnectDelay = Math.min(this.reconnectDelay * 2, 30000);
+        console.log('Ship ' + this.id + ' disconnected');
     }
 
     onError(evt) {
-        // https://en.wikipedia.org/wiki/IP_over_Avian_Carriers
-        console.error('Ship ' + this.id + ' pigeons died', evt);
+        console.error('Ship ' + this.id + ' connection error', evt);
     }
 
     onMessage(evt) {
