@@ -9,6 +9,7 @@ import (
 	"Pirates/models/ship"
 	"errors"
 	"fmt"
+	"strings"
 )
 
 func (g *Game) SetActionForShipId(shipId string, action request.Action) {
@@ -61,6 +62,18 @@ func (g *Game) NewShip(buyRequest *request.Buy) (*info.InfoShip, error) {
 	player := g.GetPlayerWithRequest(buyRequest.Player)
 	if player == nil {
 		return nil, errors.New("[PLAYER-1] Player with Secret not found")
+	}
+
+	if strings.TrimSpace(buyRequest.ShipName) == "" {
+		return nil, errors.New("[SHIP-1] Ship name cannot be empty")
+	}
+
+	for _, p := range g.players {
+		for _, s := range p.Ships {
+			if !s.Deleted && strings.EqualFold(s.Name, buyRequest.ShipName) {
+				return nil, errors.New("[SHIP-2] Ship name already taken")
+			}
+		}
 	}
 
 	price := g.calcShipPrice(buyRequest)

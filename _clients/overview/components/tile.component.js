@@ -19,7 +19,7 @@ Vue.component('tiles-view', {
         <div>
             <div class="tile-header-row">
                 <div class="tile-label tile-corner"></div>
-                <div class="tile-label tile-col-label" v-for="(tileY, Y) in tiles[0]">{{ Y }}</div>
+                <div class="tile-label tile-col-label" v-for="(tileY, Y) in (tiles && tiles[0])">{{ Y }}</div>
             </div>
             <div class="tile-map-row" v-for="(tileX, X) in tiles">
                 <div class="tile-label tile-row-label">{{ X }}</div>

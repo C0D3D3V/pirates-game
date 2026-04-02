@@ -262,6 +262,15 @@
                 };
             },
             buyShip() {
+                if (!this.newShip.ShipName || !this.newShip.ShipName.trim()) {
+                    this.error = 'Ship name cannot be empty.';
+                    return;
+                }
+                const nameLower = this.newShip.ShipName.trim().toLowerCase();
+                if (this.ships.some(s => s.name && s.name.toLowerCase() === nameLower)) {
+                    this.error = 'Ship name already taken.';
+                    return;
+                }
                 const xhr = new XMLHttpRequest();
                 const url = 'http://'+URL+'buyShip';
                 xhr.open('POST', url);
